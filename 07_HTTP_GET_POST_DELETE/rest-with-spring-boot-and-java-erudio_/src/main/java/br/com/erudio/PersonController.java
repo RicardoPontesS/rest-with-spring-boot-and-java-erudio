@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.erudio.exceptions.UnsupportedMathOperationException;
 
 @RestController
-public class MathController {
+public class PersonController {
 
 	@RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET) // chamada do método
 																						// (requisição) vinda do
