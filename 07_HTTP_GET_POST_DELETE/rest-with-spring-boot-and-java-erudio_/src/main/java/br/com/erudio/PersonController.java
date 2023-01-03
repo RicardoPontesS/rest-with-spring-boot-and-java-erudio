@@ -1,6 +1,7 @@
 package br.com.erudio;
 
 import java.awt.PageAttributes.MediaType;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -21,18 +22,20 @@ public class PersonController {
 
 	@Autowired
 	private PersonServices service;
-	
-	// chamada do método (requisição) vinda do navegador
-	@RequestMapping(value = "/{id}", 
-			method = RequestMethod.GET) 
 
-	
-	
+	// chamada do método (requisição) vinda do navegador
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+
 	public Person findById(@PathVariable(value = "id") String id) throws Exception {
 
-		
 		return service.findById(id);
 
 	}
 
+	@RequestMapping()
+	public List<Person> findAll() {
+
+		return service.findAll();
+
+	}
 }
