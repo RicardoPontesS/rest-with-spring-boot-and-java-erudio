@@ -3,20 +3,36 @@ package br.com.erudio.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Person implements Serializable {
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+@Table(name = "person")
+public class Person implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+
+	@Column(name = "first_name", nullable = false, length = 80)
 	private String firstName;
+
+	@Column(name = "last_name", nullable = false, length = 80)
 	private String lastName;
+
+	@Column(name = "adress", length = 100)
 	private String adress;
+
+	@Column(name = "gender", length = 6)
 	private String gender;
 
-	
-	
-	
-	//------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------
 	public Person(long id, String firstName, String lastName, String adress, String gender) {
 
 		this.id = id;
@@ -25,9 +41,9 @@ public class Person implements Serializable {
 		this.adress = adress;
 		this.gender = gender;
 	}
-	
+
 	public Person() {
-		
+
 	}
 
 	public String getFirstName() {
@@ -88,7 +104,4 @@ public class Person implements Serializable {
 				&& Objects.equals(gender, other.gender) && id == other.id && Objects.equals(lastName, other.lastName);
 	}
 
-	
-	
 }
-

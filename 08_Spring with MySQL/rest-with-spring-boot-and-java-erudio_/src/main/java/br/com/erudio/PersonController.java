@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.erudio.exceptions.UnsupportedMathOperationException;
+import br.com.erudio.exceptions.ResourceNotFoundException;
 import br.com.erudio.model.Person;
 import br.com.erudio.services.PersonServices;
 
@@ -43,14 +43,14 @@ public class PersonController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable(value ="id") String id) {
+	public void delete(@PathVariable(value ="id") Long id) {
 
 		service.delete(id);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 
-	public Person findById(@PathVariable(value = "id") String id) throws Exception {
+	public Person findById(@PathVariable(value = "id") Long id) throws Exception {
 
 		return service.findById(id);
 
