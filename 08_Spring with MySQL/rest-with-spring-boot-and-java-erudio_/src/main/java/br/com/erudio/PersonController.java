@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.erudio.exceptions.ResourceNotFoundException;
+import br.com.erudio.exceptions.handler.CustomizedResponseEntityExceptionHandler;
 import br.com.erudio.model.Person;
 import br.com.erudio.services.PersonServices;
 
@@ -29,6 +31,14 @@ public class PersonController {
 	private PersonServices service;
 
 	// chamada do método (requisição) vinda do navegador
+
+	@GetMapping(value = "/{id}")
+
+	public Person findById(@PathVariable(value = "id") Long id) throws Exception {
+
+		return service.findById(id);
+
+	}
 
 	@PostMapping(value = "/{id}")
 	public Person create(@RequestBody() Person person) throws Exception {
@@ -45,17 +55,10 @@ public class PersonController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public void delete(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
 
 		service.delete(id);
-	}
-
-	@GetMapping(value = "/{id}")
-
-	public Person findById(@PathVariable(value = "id") Long id) throws Exception {
-
-		return service.findById(id);
-
+		return ResponseEntity.noContent().build();
 	}
 
 	@RequestMapping()
